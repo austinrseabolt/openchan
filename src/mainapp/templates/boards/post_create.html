@@ -1,0 +1,17 @@
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="table-responsive">
+                <table class="table table-sm">
+                    {{ form.as_table }}
+                </table>
+                </div>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
