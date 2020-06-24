@@ -8,8 +8,10 @@ def index(request):
         new_oc_instance = OpenChan()
         new_oc_instance.save()
     openchan = OpenChan.objects.get(pk=1)
+    posts = Post.objects.order_by('-id')
     context = {
         'openchan':openchan,
+        'posts':posts,
     }
     return render(request, 'boards/index.html', context)
 

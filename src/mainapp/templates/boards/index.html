@@ -38,7 +38,26 @@
             <h1 class="text-center">{{ openchan.site_name }}</h1>
             <p class="text-center">{{ openchan.site_desc }}</p>
         </div>
+        <br>
+        <br>
+        <div class="container">
+            <h3 class="text-center">Recent Posts</h3>
 
+
+        </div>
+        <br>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                {% for post in posts %}
+        
+                <div class="col-md-3 posts">
+                    <h5>{{ post.post_subject}}</h5>
+                    <h6><strong>{{ post.post_name }}</strong>  {{ post.post_date}} No.{{post.local_id}}</h6>
+                    <p class="postcontent">{{ post.post_content|truncatewords:20 }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
