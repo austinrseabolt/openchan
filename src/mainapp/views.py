@@ -33,12 +33,13 @@ def board(request, boardurl):
             return HttpResponseRedirect("/" + str(currentboard.board_url)) #this redirects so you don't resubmit on refresh
 
     posts = Post.objects.filter(parent_board=currentboard).order_by('-id')
-
+    boards = Board.objects.order_by('board_url')
     
     context = {
         'form':form,
         'posts':posts,
         'board':currentboard,
+        'boards':boards,
     }
     return render(request, 'boards/board.html', context)
 
