@@ -4,11 +4,12 @@ from .forms import NewThreadForm
 from .models import *
 #from .models import * 
 def index(request):
+    return HttpResponse("OpenChan")
 
-    pass
 
-def board(request):
+def board(request, boardurl):
     form = NewThreadForm(request.POST or None)
+    currentboard = Board.objects.get(board_url=boardurl)
     if request.method == "POST":
        
         if form.is_valid():
@@ -22,8 +23,9 @@ def board(request):
     context = {
         'form':form,
         'posts':posts,
+        'board':currentboard,
     }
-    return render(request, 'boards/main.html', context)
+    return render(request, 'boards/board.html', context)
 
 def viewthread(request):
 

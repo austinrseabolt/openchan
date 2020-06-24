@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>OpenChan</title>
+        <title>/{{ board.board_url }}/ - {{ board.board_description }}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <meta Cache-Control: no-cache, no-store, must-revalidate>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,8 +36,8 @@
 
     <body>
         <div class="container">
-            <h1 class="text-center">Test Board</h1>
-            <p class="text-center">Don't post anything illegal here</p>
+            <h1 class="text-center">/{{ board.board_url }}/</h1>
+            <p class="text-center">{{ board.board_description}}</p>
         </div>
        
         {% include "boards/post_create.html" %}
