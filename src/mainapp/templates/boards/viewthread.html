@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>/{{ board.board_url }}/ - {{ board.board_description }}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <meta Cache-Control: no-cache, no-store, must-revalidate>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            
+            body{
+                background-color:#1d1f21;
+                color: #c5c8c6;
+            }
+            
+            .posts{
+                background-color: #282a2e;
+                color: #c5c8c6;
+                margin: 2px;
+            }
+            .postcontent{
+                overflow: hidden;
+                text-overflow: hidden;
+            }
+            .table-responsive {
+                display: table;
+            }
+            .table{
+                color:#c5c8c6;
+                
+            }
+            
+           
+
+        </style>
+    </head>
+
+    <body>
+        {% include "boards/boardlinks.html" %}
+        
+        <div class="container">
+            <h1 class="text-center">/{{ board.board_url }}/</h1>
+            <p class="text-center">{{ board.board_description}}</p>
+        </div>
+        {% include "boards/post_create.html" %}
+
+        <div class="container">
+            <div class="col align-self-center posts">
+                <h5>{{ op.post_subject}}</h5>
+                <h6><strong>{{ op.post_name }}</strong>  {{ op.post_date}} No.{{op.local_id}}</h6>
+                <p class="postcontent">{{ op.post_content }}</p>
+                {% if op.mod_warning %}<p class="modwarning" style="color: red;"><strong>({{ op.mod_warning }})</strong></p>{% endif %}
+                <br>
+                <br>
+                <br>
+            </div>
+
+            {% for post in threadreplies %}
+
+            <div class="col align-self-center posts">
+                <h5>{{ post.post_subject}}</h5>
+                <h6><strong>{{ post.post_name }}</strong>  {{ post.post_date}} No.{{post.local_id}}</h6>
+                <p class="postcontent">{{ post.post_content }}</p>
+                <br>
+                <br>
+                <br>
+                {% if post.mod_warning %}<p class="modwarning" style="color: red;"><strong>({{ post.mod_warning }})</strong></p>{% endif %}
+            </div>
+            {% endfor %}
+         </div>
+    
+    
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>

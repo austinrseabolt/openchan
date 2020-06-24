@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import NewThreadForm
+from .forms import NewPostForm
 from .models import *
 #from .models import * 
 def index(request):
@@ -8,7 +8,7 @@ def index(request):
         new_oc_instance = OpenChan()
         new_oc_instance.save()
     openchan = OpenChan.objects.get(pk=1)
-    posts = Post.objects.order_by('-id')
+    posts = Post.objects.filter(parent_post__isnull=True).order_by('-id')
     boards = Board.objects.order_by('board_url')
     context = {
         'openchan':openchan,
@@ -19,7 +19,7 @@ def index(request):
 
 
 def board(request, boardurl):
-    form = NewThreadForm(request.POST or None)
+    form = NewPostForm(request.POST or None)
     currentboard = Board.objects.get(board_url=boardurl)
     if request.method == "POST":
        
@@ -32,7 +32,7 @@ def board(request, boardurl):
             currentboard.save()
             return HttpResponseRedirect("/" + str(currentboard.board_url)) #this redirects so you don't resubmit on refresh
 
-    posts = Post.objects.filter(parent_board=currentboard).order_by('-id')
+    posts = Post.objects.filter(parent_board=currentboard, parent_post__isnull=True).order_by('-id')
     boards = Board.objects.order_by('board_url')
     if OpenChan.objects.count() < 1:
         new_oc_instance = OpenChan()
@@ -48,7 +48,34 @@ def board(request, boardurl):
     }
     return render(request, 'boards/board.html', context)
 
-def viewthread(request):
+def ViewThread(request, boardurl, post_pk):
+    form = NewPostForm(request.POST or None)
+    op = Post.objects.get(pk=post_pk)
+    currentboard = op.parent_board
+    boards = Board.objects.order_by('board_url')
+    openchan = OpenChan.objects.get(pk=1)
+    if request.method == "POST":
+        if form.is_valid():
+            newpost = form.save(commit=False)
+            currentboard.post_counter += 1
+            newpost.parent_board = currentboard
+            newpost.local_id = currentboard.post_counter
+            newpost.parent_post = op
+            newpost.save()
+            currentboard.save()
+            return HttpResponseRedirect("/" + str(currentboard.board_url) +"/" + str(op.pk))
+    
+    threadreplies = Post.objects.filter(parent_post=op).order_by('id')
+    
+    context = {
+        'op':op,
+        'form':form,
+        'board':currentboard,
+        'boards':boards,
+        'openchan':openchan,
+        'threadreplies':threadreplies,
 
+    }
 
-    pass
+    return render(request, 'boards/viewthread.html', context)
+
