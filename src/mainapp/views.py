@@ -34,12 +34,17 @@ def board(request, boardurl):
 
     posts = Post.objects.filter(parent_board=currentboard).order_by('-id')
     boards = Board.objects.order_by('board_url')
+    if OpenChan.objects.count() < 1:
+        new_oc_instance = OpenChan()
+        new_oc_instance.save()
+    openchan = OpenChan.objects.get(pk=1)
     
     context = {
         'form':form,
         'posts':posts,
         'board':currentboard,
         'boards':boards,
+        'openchan':openchan,
     }
     return render(request, 'boards/board.html', context)
 

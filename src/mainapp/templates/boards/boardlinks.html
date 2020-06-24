@@ -1,8 +1,8 @@
 <div class="row justify-content-center">
     <p>[</p>
-    <p> &nbsp <a href="/">Home</a> &nbsp </p>
+    <p> &nbsp <a href="/" title="{{ openchan.site_name }} - {{ openchan.site_desc }}">Home</a> &nbsp </p>
     {% for board in boards %}
-    <p> &nbsp <a href="/{{ board.board_url }}">/{{ board.board_url }}/</a> &nbsp </p>
+    <p> &nbsp <a href="/{{ board.board_url }}" title="{{ board }}">/{{ board.board_url }}/</a> &nbsp </p>
     {% endfor %}
     <p>]</p>
 </div>
