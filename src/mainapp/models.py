@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone 
 
 class OpenChan(models.Model):
-    site_name = models.CharField(max_length=20, default="OpenChan")
+    site_name = models.CharField(max_length=20, default="OpenChan", unique=True)
     site_desc = models.CharField(max_length = 50, default="The Open Source Chan Software")
     
     def __str__(self):
@@ -32,8 +32,8 @@ class Post(models.Model):
     local_id = models.BigIntegerField(default = 0)
     def __str__(self):
         if self.post_subject:
-            return self.post_subject
+            return str(self.parent_board.board_url + str(self.local_id) + self.post_subject)
         else: 
-            return self.post_content[:20]
+            return str("/" + self.parent_board.board_url + "/ #" + str(self.local_id) + " - " + self.post_content[:30] + "...")
 
 
