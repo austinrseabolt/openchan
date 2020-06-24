@@ -51,6 +51,7 @@
                 {% for post in posts %}
         
                 <div class="col-md-3 posts">
+                    <h5><a href="/{{ post.parent_board.board_url }}"> {{ post.parent_board }}</a></h5>
                     <h5>{{ post.post_subject}}</h5>
                     <h6><strong>{{ post.post_name }}</strong>  {{ post.post_date}} No.{{post.local_id}}</h6>
                     <p class="postcontent">{{ post.post_content|truncatewords:20 }}</p>
