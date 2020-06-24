@@ -7,6 +7,9 @@ class OpenChan(models.Model):
     
     def __str__(self):
         return("Site Settings")
+    class Meta:
+        verbose_name = 'Openchan Instance'
+        verbose_name_plural = 'Openchan Instance'
 
 
 class Board(models.Model):
