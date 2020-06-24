@@ -16,8 +16,7 @@ def board(request, boardurl):
             form.save()
             return HttpResponseRedirect("/" + str(currentboard.board_url)) #this redirects so you don't resubmit on refresh
 
-    
-    posts = Post.objects.order_by('-id')
+    posts = Post.objects.filter(parent_board=currentboard).order_by('-id')
 
     
     context = {

@@ -15,8 +15,8 @@ class Post(models.Model):
     post_subject = models.CharField(max_length=50, blank=True)
     post_content = models.TextField()
     post_date = models.DateTimeField(auto_now_add=True, blank=True)
-    parent = models.ForeignKey('self', null=True, blank=True, related_name='replies', on_delete=models.CASCADE)
-    board = models.ForeignKey("Board", null=True, blank=True, on_delete=models.CASCADE)
+    parent_post = models.ForeignKey('self', null=True, blank=True, related_name='replies', on_delete=models.CASCADE)
+    parent_board = models.ForeignKey("Board", null=True, blank=True, on_delete=models.CASCADE)
     def __str__(self):
         if self.post_subject:
             return self.post_subject
