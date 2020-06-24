@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import NewThreadForm
-from .models import Post, Thread
+from .models import *
 #from .models import * 
+def index(request):
+
+    pass
 
 def board(request):
     form = NewThreadForm(request.POST or None)
