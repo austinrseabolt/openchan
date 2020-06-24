@@ -4,6 +4,9 @@ from django.utils import timezone
 class OpenChan(models.Model):
     site_name = models.CharField(max_length=20, default="OpenChan")
     site_desc = models.CharField(max_length = 50, default="The Open Source Chan Software")
+    
+    def __str__(self):
+        return("Site Settings")
 
 
 class Board(models.Model):

@@ -4,7 +4,14 @@ from .forms import NewThreadForm
 from .models import *
 #from .models import * 
 def index(request):
-    return HttpResponse("OpenChan")
+    if OpenChan.objects.count() < 1:
+        new_oc_instance = OpenChan()
+        new_oc_instance.save()
+    openchan = OpenChan.objects.get(pk=1)
+    context = {
+        'openchan':openchan,
+    }
+    return render(request, 'boards/index.html', context)
 
 
 def board(request, boardurl):
