@@ -14,7 +14,7 @@ def board(request, boardurl):
        
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/") #this redirects so you don't resubmit on refresh
+            return HttpResponseRedirect("/" + str(currentboard.board_url)) #this redirects so you don't resubmit on refresh
 
     
     posts = Post.objects.order_by('-id')
