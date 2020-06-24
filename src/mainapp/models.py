@@ -30,6 +30,7 @@ class Post(models.Model):
     parent_post = models.ForeignKey('self', null=True, blank=True, related_name='replies', on_delete=models.CASCADE)
     parent_board = models.ForeignKey("Board", null=True, blank=True, on_delete=models.CASCADE)
     local_id = models.BigIntegerField(default = 0)
+    mod_warning = models.CharField(max_length=100, blank=True, null=True)
     def __str__(self):
         if self.post_subject:
             return str(self.parent_board.board_url + str(self.local_id) + self.post_subject)
