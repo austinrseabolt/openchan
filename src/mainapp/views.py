@@ -13,7 +13,12 @@ def board(request, boardurl):
     if request.method == "POST":
        
         if form.is_valid():
-            form.save()
+            newpost = form.save(commit=False)
+            currentboard.post_counter += 1
+            newpost.parent_board = currentboard
+            newpost.local_id = currentboard.post_counter
+            newpost.save()
+            currentboard.save()
             return HttpResponseRedirect("/" + str(currentboard.board_url)) #this redirects so you don't resubmit on refresh
 
     posts = Post.objects.filter(parent_board=currentboard).order_by('-id')

@@ -1,9 +1,15 @@
 from django.db import models
 from django.utils import timezone 
 
+class OpenChan(models.Model):
+    site_name = models.CharField(max_length=20, default="OpenChan")
+    site_desc = models.CharField(max_length = 50, default="The Open Source Chan Software")
+
+
 class Board(models.Model):
     board_url = models.CharField(max_length=4, primary_key=True)
     board_description = models.CharField(max_length=30)
+    post_counter = models.BigIntegerField(default = 0)
 
     def __str__(self):
         return str("/" + self.board_url + "/ - " + self.board_description)
@@ -17,6 +23,7 @@ class Post(models.Model):
     post_date = models.DateTimeField(auto_now_add=True, blank=True)
     parent_post = models.ForeignKey('self', null=True, blank=True, related_name='replies', on_delete=models.CASCADE)
     parent_board = models.ForeignKey("Board", null=True, blank=True, on_delete=models.CASCADE)
+    local_id = models.BigIntegerField(default = 0)
     def __str__(self):
         if self.post_subject:
             return self.post_subject
