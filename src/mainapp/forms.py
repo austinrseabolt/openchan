@@ -14,3 +14,8 @@ class NewPostForm(forms.ModelForm):
             'post_subject':'Subject',
             'post_content':'Content',
         }
+        widgets = {
+            'post_name' : forms.TextInput(attrs={'class':"form-control",}),
+            'post_subject' : forms.TextInput(attrs={'class':"form-control",}),
+            'post_content' : forms.Textarea(attrs={'class':"form-control", "rows":5}),
+        }
