@@ -5,36 +5,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <meta Cache-Control: no-cache, no-store, must-revalidate>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-        <style>
-            
-            body{
-                margin: 0;
-                padding: 0;
-                overflow-x: hidden;
-                background-color:#1d1f21;
-                color: #c5c8c6;
-            }
-            
-            .posts{
-                background-color: #282a2e;
-                color: #c5c8c6;
-                margin: 2px;
-            }
-            .postcontent{
-                overflow: hidden;
-                text-overflow: hidden;
-            }
-            .table-responsive {
-                display: table;
-            }
-            .table{
-                color:#c5c8c6;
-                
-            }
-            
-           
-
-        </style>
+        {% include "boards/style_overrides.html" %}
     </head>
 
     <body>
@@ -43,7 +14,7 @@
             <h1 class="text-center">/{{ board.board_url }}/</h1>
             <p class="text-center">{{ board.board_description}}</p>
         </div>
-       
+        
         {% include "boards/post_create.html" %}
         <br>
         {% include "boards/post_preview.html" %}
