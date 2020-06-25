@@ -44,40 +44,11 @@
         </div>
         <br>
         <br>
-        <div class="container">
-            <h3 class="text-center">Recent Posts</h3>
-
-
-        </div>
-        <br>
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                {% for post in posts %}
-                {% if  forloop.counter <= 12 %}
-                <div class="col-md-3 posts">
-                    <h6><a href="/{{ post.parent_board.board_url }}"> {{ post.parent_board }}</a></h6>
-                    <h5>{{ post.post_subject}}</h5>
-                    
-                    <h6><strong>{{ post.post_name }}</strong>  {{ post.post_date}} No.{{post.local_id}}</h6>
-                    <p class="postcontent">{{ post.post_content|truncatewords:20 }}</p>
-                    {% if post.mod_warning %}<p class="modwarning" style="color: red;"><strong>({{ post.mod_warning }})</strong></p>{% endif %}
-                    <p style="font-size: small;">Replies: {{post.replies.count}} </p>
-                    <a href="{{ post.parent_board.board_url }}/{{ post.pk }}">[View Thread]</a>
-                </div>
-                {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-        <footer class="page-footer font-small blue">
-
-            
-            <div class="footer-copyright text-center py-3">© 2020 Copyright:
-              <a href="/"> {{openchan.site_name }}</a>
-              <p>Powered by <a href="https://github.com/austinrseabolt/openchan">OpenChan</a></p>
-            </div>
-           
-          
-        </footer>
+       
+        {% include "boards/recent_posts.html" %}
+        {% include "boards/footer.html" %}
+        
+        
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
