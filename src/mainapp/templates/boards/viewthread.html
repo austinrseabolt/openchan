@@ -21,8 +21,15 @@
             <div class="col align-self-center posts">
                 <h5>{{ op.post_subject}}</h5>
                 <h6><strong>{{ op.post_name }}</strong>  {{ op.post_date}} No.{{op.local_id}}</h6>
+                {% if op.post_image %}
+                <div class="container imgcontainer">
+                    <img src="/media/{{ op.post_image }}" class="fullimage">
+                    <br>
+                    <br>
+                </div>
+                {% endif %}
                 <p class="postcontent">{{ op.post_content }}</p>
-                {% if op.mod_warning %}<p class="modwarning" style="color: red;"><strong>({{ op.mod_warning }})</strong></p>{% endif %}
+                {% if op.mod_warning %}<p class="modwarning"><strong>({{ op.mod_warning }})</strong></p>{% endif %}
                 <br>
                 <br>
                 <br>
@@ -33,11 +40,18 @@
             <div class="col align-self-center posts">
                 <h5>{{ post.post_subject}}</h5>
                 <h6><strong>{{ post.post_name }}</strong>  {{ post.post_date}} No.{{post.local_id}}</h6>
+                {% if post.post_image %}
+                <div class="container imgcontainer">
+                    <img src="/media/{{ post.post_image }}" class="postimage">
+                    <br>
+                    <br>
+                </div>
+                {% endif %}
                 <p class="postcontent">{{ post.post_content }}</p>
                 <br>
                 <br>
                 <br>
-                {% if post.mod_warning %}<p class="modwarning" style="color: red;"><strong>({{ post.mod_warning }})</strong></p>{% endif %}
+                {% if post.mod_warning %}<p class="modwarning"><strong>({{ post.mod_warning }})</strong></p>{% endif %}
             </div>
             {% endfor %}
          </div>
