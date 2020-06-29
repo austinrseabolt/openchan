@@ -26,6 +26,11 @@ def index(request):
     return render(request, 'boards/index.html', context)
 
 
+def news(request, newsid):
+
+    pass
+
+
 def board(request, boardurl):
     form = NewPostForm(request.POST, request.FILES)
     currentboard = Board.objects.get(board_url=boardurl)
@@ -63,7 +68,7 @@ def board(request, boardurl):
 
 def ViewThread(request, boardurl, post_pk):
     form = NewPostForm(request.POST, request.FILES)
-    op = Post.objects.get(pk=post_pk)
+    op = Post.objects.get(pk=post_pk, parent_board=boardurl)
     if request.user.is_authenticated:
         auth = True
     else:

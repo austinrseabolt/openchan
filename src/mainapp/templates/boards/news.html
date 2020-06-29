@@ -6,7 +6,9 @@
     <div class="row justify-content-center">
         {% for post in news %}
         {% if  forloop.counter <= 3 %}
-        <h6> {{ post.news_subject }} </h6>
+        <div class="container">
+            <h6 class="text-center"> {{ post.news_subject }} </h6>
+        </div>
         {% endif %}
         {% endfor %}
     </div>
