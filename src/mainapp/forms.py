@@ -8,6 +8,7 @@ class NewPostForm(forms.ModelForm):
             'post_name',
             'post_subject',
             'post_content',
+            'post_image',
         ]
         labels = {
             'post_name':'Name',
@@ -15,7 +16,7 @@ class NewPostForm(forms.ModelForm):
             'post_content':'Content',
         }
         widgets = {
-            'post_name' : forms.TextInput(attrs={'class':"form-control",}),
+            'post_name' : forms.TextInput(attrs={'class':"form-control", 'value':"Anonymous"}),
             'post_subject' : forms.TextInput(attrs={'class':"form-control",}),
             'post_content' : forms.Textarea(attrs={'class':"form-control", "rows":5}),
         }

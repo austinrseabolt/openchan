@@ -19,7 +19,7 @@ def index(request):
 
 
 def board(request, boardurl):
-    form = NewPostForm(request.POST or None)
+    form = NewPostForm(request.POST, request.FILES)
     currentboard = Board.objects.get(board_url=boardurl)
     if request.method == "POST":
        
@@ -49,7 +49,7 @@ def board(request, boardurl):
     return render(request, 'boards/board.html', context)
 
 def ViewThread(request, boardurl, post_pk):
-    form = NewPostForm(request.POST or None)
+    form = NewPostForm(request.POST, request.FILES)
     op = Post.objects.get(pk=post_pk)
     currentboard = op.parent_board
     boards = Board.objects.order_by('board_url')
