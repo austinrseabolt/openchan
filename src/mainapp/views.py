@@ -7,13 +7,20 @@ def index(request):
     if OpenChan.objects.count() < 1:
         new_oc_instance = OpenChan()
         new_oc_instance.save()
+    
+    
     openchan = OpenChan.objects.get(pk=1)
     posts = Post.objects.filter(parent_post__isnull=True).order_by('-id')
     boards = Board.objects.order_by('board_url')
+    if request.user.is_authenticated:
+        auth = True
+    else:
+        auth = False
     context = {
         'openchan':openchan,
         'posts':posts,
         'boards':boards,
+        'auth':auth,
     }
     return render(request, 'boards/index.html', context)
 
@@ -21,6 +28,10 @@ def index(request):
 def board(request, boardurl):
     form = NewPostForm(request.POST, request.FILES)
     currentboard = Board.objects.get(board_url=boardurl)
+    if request.user.is_authenticated:
+        auth = True
+    else:
+        auth = False
     if request.method == "POST":
        
         if form.is_valid():
@@ -45,12 +56,17 @@ def board(request, boardurl):
         'board':currentboard,
         'boards':boards,
         'openchan':openchan,
+        'auth':auth,
     }
     return render(request, 'boards/board.html', context)
 
 def ViewThread(request, boardurl, post_pk):
     form = NewPostForm(request.POST, request.FILES)
     op = Post.objects.get(pk=post_pk)
+    if request.user.is_authenticated:
+        auth = True
+    else:
+        auth = False
     currentboard = op.parent_board
     boards = Board.objects.order_by('board_url')
     openchan = OpenChan.objects.get(pk=1)
@@ -74,6 +90,7 @@ def ViewThread(request, boardurl, post_pk):
         'boards':boards,
         'openchan':openchan,
         'threadreplies':threadreplies,
+        'auth':auth,
 
     }
 
