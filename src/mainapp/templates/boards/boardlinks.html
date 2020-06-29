@@ -5,7 +5,7 @@
     <p><a href="/admin">Admin</a> &nbsp</p>
     {% endif %}
     {% for board in boards %}
-    <p> &nbsp <a href="/{{ board.board_url }}" title="{{ board }}">/{{ board.board_url }}/</a> &nbsp </p>
+    <p> &nbsp <a href="/boards/{{ board.board_url }}" title="{{ board }}">/{{ board.board_url }}/</a> &nbsp </p>
     {% endfor %}
     <p>]</p>
 </div>

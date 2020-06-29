@@ -16,6 +16,7 @@ class News(models.Model):
     news_subject = models.CharField(max_length=30)
     news_content = models.TextField()
     news_date = models.DateTimeField(auto_now_add=True, blank=True)
+    show_alert = models.BooleanField(default=False)
     def __str__(self):
         return(self.news_subject)
     class Meta:

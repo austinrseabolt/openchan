@@ -1,0 +1,15 @@
+<div class="container">
+    <h3 class="text-center">News</h3>
+</div>
+<br>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        {% for post in news %}
+        {% if  forloop.counter <= 3 %}
+        <h6> {{ post.news_subject }} </h6>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<br>
+<br>

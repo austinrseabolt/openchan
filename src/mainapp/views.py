@@ -8,7 +8,7 @@ def index(request):
         new_oc_instance = OpenChan()
         new_oc_instance.save()
     
-    
+    news = News.objects.order_by('-id')
     openchan = OpenChan.objects.get(pk=1)
     posts = Post.objects.filter(parent_post__isnull=True).order_by('-id')
     boards = Board.objects.order_by('board_url')
@@ -21,6 +21,7 @@ def index(request):
         'posts':posts,
         'boards':boards,
         'auth':auth,
+        'news':news,
     }
     return render(request, 'boards/index.html', context)
 
@@ -41,7 +42,7 @@ def board(request, boardurl):
             newpost.local_id = currentboard.post_counter
             newpost.save()
             currentboard.save()
-            return HttpResponseRedirect("/" + str(currentboard.board_url)) #this redirects so you don't resubmit on refresh
+            return HttpResponseRedirect("/boards/" + str(currentboard.board_url)) #this redirects so you don't resubmit on refresh
 
     posts = Post.objects.filter(parent_board=currentboard, parent_post__isnull=True).order_by('-id')
     boards = Board.objects.order_by('board_url')
@@ -79,7 +80,7 @@ def ViewThread(request, boardurl, post_pk):
             newpost.parent_post = op
             newpost.save()
             currentboard.save()
-            return HttpResponseRedirect("/" + str(currentboard.board_url) +"/" + str(op.pk))
+            return HttpResponseRedirect("/boards/" + str(currentboard.board_url) +"/" + str(op.pk))
     
     threadreplies = Post.objects.filter(parent_post=op).order_by('id')
     
