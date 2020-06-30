@@ -29,13 +29,19 @@
                 </div>
                 {% endif %}
                 <p class="postcontent">{{ op.post_content }}</p>
-                {% if op.mod_warning %}<p class="modwarning text-center"><strong>({{ op.mod_warning }})</strong></p>{% endif %}
+                {% if op.mod_warning %}
+                <div>
+                    <div class="modwarning" style="display: inline-block;">
+                        <p class="text-center"><strong>({{ op.mod_warning }})</strong></p>
+                    </div>
+                </div>
+                {% endif %}
                 <br>
             </div>
 
             {% for post in threadreplies %}
             <div>
-                <div class="row posts">
+                <div class="posts">
                     <h5>{{ post.post_subject}}</h5>
                     <h6><strong>{{ post.post_name }}</strong>  {{ post.post_date}} No.{{post.local_id}}</h6>
                     {% if post.post_image %}
@@ -43,7 +49,9 @@
                         <img src="/media/{{ post.post_image }}" class="fullimage">
                     </div>
                     {% endif %}
-                    <blockquote class="postcontent">{{ post.post_content }}</blockquote>
+                    
+                    <span class="postcontent">{{ post.post_content }}</span>
+                    
                     {% if post.mod_warning %}
                     <br>
                     <br>
