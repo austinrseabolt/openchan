@@ -7,7 +7,7 @@
         {% for post in news %}
         {% if  forloop.counter <= 3 %}
         <div class="container">
-            <h6 class="text-center"> {{ post.news_subject }} </h6>
+            <h6 class="text-center"> {{ post.news_date|date:"M d Y" }} - {{ post.news_subject }} </h6>
         </div>
         {% endif %}
         {% endfor %}

@@ -18,7 +18,7 @@ class News(models.Model):
     news_date = models.DateTimeField(auto_now_add=True, blank=True)
     show_alert = models.BooleanField(default=False)
     def __str__(self):
-        return(self.news_subject)
+        return(str(self.news_date) + " - " + self.news_subject)
     class Meta:
         verbose_name = 'News'
         verbose_name_plural = 'News'
