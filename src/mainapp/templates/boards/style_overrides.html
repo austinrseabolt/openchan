@@ -9,13 +9,20 @@
     }
     
     .posts{
+        display: inline-block;
+        max-width: 100%;
         background-color: #282a2e;
         color: #c5c8c6;
         margin: 2px;
+        padding-left: 8px;
+        padding-right: 8px;
     }
     .postcontent{
-        overflow: hidden;
-        text-overflow: hidden;
+        display: inline-block;
+        vertical-align: top;
+        overflow-wrap: anywhere; 
+        margin-left: 12px;
+        
     }
     .table-responsive {
         display: table;
@@ -34,7 +41,9 @@
     }
 
     .imgcontainer {
-        max-width: 500px;
+        display: inline-block;
+        max-width: 300px;
+        
     }
    
 

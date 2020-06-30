@@ -29,29 +29,28 @@
                 </div>
                 {% endif %}
                 <p class="postcontent">{{ op.post_content }}</p>
-                {% if op.mod_warning %}<p class="modwarning"><strong>({{ op.mod_warning }})</strong></p>{% endif %}
-                <br>
-                <br>
+                {% if op.mod_warning %}<p class="modwarning text-center"><strong>({{ op.mod_warning }})</strong></p>{% endif %}
                 <br>
             </div>
 
             {% for post in threadreplies %}
-
-            <div class="col align-self-center posts">
-                <h5>{{ post.post_subject}}</h5>
-                <h6><strong>{{ post.post_name }}</strong>  {{ post.post_date}} No.{{post.local_id}}</h6>
-                {% if post.post_image %}
-                <div class="container imgcontainer">
-                    <img src="/media/{{ post.post_image }}" class="fullimage">
+            <div>
+                <div class="row posts">
+                    <h5>{{ post.post_subject}}</h5>
+                    <h6><strong>{{ post.post_name }}</strong>  {{ post.post_date}} No.{{post.local_id}}</h6>
+                    {% if post.post_image %}
+                    <div class="imgcontainer">
+                        <img src="/media/{{ post.post_image }}" class="fullimage">
+                    </div>
+                    {% endif %}
+                    <blockquote class="postcontent">{{ post.post_content }}</blockquote>
+                    {% if post.mod_warning %}
                     <br>
                     <br>
+                    <br>
+                    <p class="modwarning text-center"><strong>({{ post.mod_warning }})</strong></p>
+                    {% endif %}
                 </div>
-                {% endif %}
-                <p class="postcontent">{{ post.post_content }}</p>
-                <br>
-                <br>
-                <br>
-                {% if post.mod_warning %}<p class="modwarning"><strong>({{ post.mod_warning }})</strong></p>{% endif %}
             </div>
             {% endfor %}
          </div>
